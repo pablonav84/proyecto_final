@@ -1,0 +1,147 @@
+paths:
+  /api/carritos/{cid}:
+    get:
+      summary: Obtener un carrito por su ID
+      tags:
+      - carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carrito'
+        400:
+          description: ID Inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: ID Inexistente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Error Indeterminado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/carritos/{cid}/producto/{pid}:
+    put:
+      summary: Agregar producto al carrito
+      tags:
+      - carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payload:
+                    type: string
+        400:
+          description: ID Inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: ID Inexistente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Error Indeterminado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/carritos/{cid}/purchase:
+    put:
+      summary: Realizar compra desde el carrito
+      tags:
+      - carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        400:
+          description: Solicitud Incorrecta
+          content:
+            application/json:
+              properties:
+                message:
+                  type: string
+        500:
+          description: Error Indeterminado
+          content:
+            application/json:
+              properties:
+                message:
+                  type: string
+components:
+  schemas:
+    Carrito:
+      type: object
+      properties:
+        _id:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+    Item:
+      type: object
+      properties:
+        productId:
+          type: string
+        cantidad:
+          type: integer
+        _id:
+          type: string
+    Error:
+      type: object
+      properties:
+        name:
+          type: string
+        cause:
+          type: string
+        message:
+          type: string
+        code:
+          type: integer

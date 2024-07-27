@@ -1,0 +1,45 @@
+config:
+  target: http://localhost:8080
+  phases:
+    - duration: 10
+      arrivalRate: 5
+      rampTo: 10
+      name: Fase 1
+    - duration: 10
+      arrivalRate: 10
+      rampTo: 5
+      name: Fase 2
+scenarios:
+  - flow:
+      - loop:
+          - get:
+              url: '/usuario'
+              capture:
+                - json: "$.usuario.nombre"
+                  as: "nombre1"
+                - json: "$.usuario.apellido"
+                  as: "apellido"
+                - json: "$.usuario.email"
+                  as: "email"
+                - json: "$.usuario.edad"
+                  as: "edad"  
+                - json: "$.usuario.password"
+                  as: "password"
+          - post:
+              url: '/api/sessions/registro'
+              json:
+                nombre: "{{nombre1}}"
+                apellido: "{{apellido}}"
+                email: "{{email}}"
+                edad: "{{edad}}"
+                password: "{{password}}"
+              capture:
+                - json: "$.usuario._id"
+                  as: "mongoID"
+          - log: "Usuario generado {{nombre1}} {{apellido}} - mongoid: {{mongoID}}"
+          - post:
+              url: '/api/sessions/login'
+              json:
+                email: "{{email}}"
+                password: "{{password}}"
+        count: 1

@@ -1,0 +1,24 @@
+<h2>Carga de documentos:</h2>
+<hr>
+<form action="/api/usuarios/{{_id}}/profiles" method="post" enctype="multipart/form-data">
+  <label for="perfil">Imagen de perfil:</label>
+  <input type="file" name="perfil" accept=".jpg, .jpeg, .png"/>
+  <br>
+  <label for="producto">Imagen de producto:</label>
+  <input type="file" name="producto" accept=".jpg, .jpeg, .png"/>
+  <br>
+  <input type="submit" value="Enviar">
+</form>
+
+<form action="/api/usuarios/{{_id}}/documents" method="post" enctype="multipart/form-data">
+  <label for="documentos">Identificación:</label>
+  <input type="file" name="documento" accept=".pdf, .doc, .docx"/>
+  <br>
+  <label for="documentos">Comprobante de Domicilio:</label>
+  <input type="file" name="comprobante" accept=".pdf, .doc, .docx"/>
+  <br>
+  <label for="documentos">Estado de Cuenta:</label>
+  <input type="file" name="estadoCuenta" accept=".pdf, .doc, .docx"/>
+  <br>
+  <input type="submit" value="Enviar">
+</form>

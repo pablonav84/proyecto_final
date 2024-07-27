@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer Clave</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f2f2f2; padding: 20px;">
+  <h1 style="text-align: center; color: #333;">Restablecer Clave</h1>
+  <form action="/api/sessions/recupero03" method="POST" style="max-width: 400px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 5px;">
+    <label for="clave" style="display: block; text-align: center;">Nueva Clave:</label>
+    <input type="password" name="password" required style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 3px;">
+    <br>
+    <label for="confirmarClave" style="display: block; margin-top: 10px; text-align: center;">Confirmar Clave:</label>
+    <input type="password" name="password2" required style="width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 3px;">
+    <br>
+    <input type="hidden" name="token" value="<%= token %>">
+    <br>
+    <button type="submit" style="width: 100%; background-color: #007bff; color: #fff; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">Restablecer</button>
+  </form>
+</body>
+</html>

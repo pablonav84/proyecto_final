@@ -1,0 +1,26 @@
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+<h2>Detalles de su compra</h2>
+
+<div>
+  <p>Código: {{ticket.code}}</p>
+  <p>Fecha de creación: {{ticket.created_at}}</p>
+  <p>Items:</p>
+  <ul>
+    {{#each ticket.items}}
+      <p>Nombre: {{this.description}}</p>
+        <p>Cantidad: {{this.cantidad}}</p>
+        <p>Precio: {{this.price}}</p>
+    {{/each}}
+  </ul>
+  <p>Monto: {{ticket.amount}}</p>
+  <p>Comprador: {{ticket.purchaser}}</p>
+</div>
+
+<p id="importe">Su importe a pagar es: {{ticket.amount}}</p>
+
+<button onclick="cargarMedios()">Confirmar Compra</button>
+
+<div id="wallet_container"></div>
+
+
+<script src="js/index.js"></script>

@@ -19,16 +19,14 @@ router.get('/current', passportCall("jwt"), auth(["usuario", "admin"]), async (r
     const usuarioDTO = new UsuariosDTO(usuario);
 
     if (rolUsuario === "admin") {
-      // Lógica para acciones de administrador (crear, actualizar, eliminar productos)
-      // ...
+      
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json({
         mensaje: 'Perfil de administrador',
         datosUsuario: usuarioDTO
       });
     } else if (rolUsuario === "usuario") {
-      // Lógica para acciones de usuario (enviar mensajes al chat, agregar productos al carrito)
-      // ...
+      
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json({
         mensaje: 'Perfil de usuario',
@@ -104,14 +102,13 @@ router.get('/logout', passportCall("jwt"), (req, res) => {
     { new: true }
   )
     .then((usuarioActualizado) => {
-      // El usuario se ha actualizado correctamente
+      
       console.log("Conexión finalizada:", usuarioActualizado.last_connection);
 
       // Enviar una respuesta al cliente
       res.send('<script>alert("Logout exitoso"); window.location.href="/?mensaje=Logout exitoso";</script>');
     })
     .catch((error) => {
-      // Ocurrió un error al actualizar el usuario
       console.error("Error al actualizar la última conexión:", error);
       res.status(500).send("Error al actualizar la última conexión");
     });

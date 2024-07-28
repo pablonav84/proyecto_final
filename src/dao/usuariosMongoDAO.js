@@ -9,35 +9,28 @@ export class usuariosMongoDAO{
         const usuarios = await usuarioModelo.find(filtro).populate('cart').populate('rol').lean()
         return  usuarios
     }
-
     async getDTO(){
         const usuarios = await usuarioModelo.find();
         const usuariosDTO = usuarios.map(usuario => new UsuariosDTO(usuario));
         return usuariosDTO;
     }
-
     async getBy(filtro={}){
         return await usuarioModelo.findOne(filtro).populate('cart').populate('rol').lean()
     }
-
     async getBySinLean(filtro={}){
         return await usuarioModelo.findOne(filtro).populate('cart').populate('rol')
     }
-
     async updateUsuario(id, modificacion = {}) {
         return await usuarioModelo.updateOne({ _id: id }, modificacion);
       }
-
     async create(usuario){
          let nuevoUsuario = await usuarioModelo.create(usuario)
         return nuevoUsuario.toJSON()
     }
-
     async validarEmail(email) {
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/; //Uso expresiones regulares
         return emailRegex.test(email);
     }    
-
     async validarPassword(password) {
         const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/;
         return passwordRegex.test(password);

@@ -26,7 +26,7 @@ btnSubmit.addEventListener("click", async(e)=>{
     })
     let status=resultado.status
     let datos=await resultado.json()
-    console.log(resultado.status)
+
     if(status==201){
         window.location.href = "/";
     }else{

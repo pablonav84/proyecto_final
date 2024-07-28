@@ -16,20 +16,18 @@ export class CustomRouter{
         this.router.get(ruta, this.customResponses, ...funciones)  // ... son el operador spread
     }
 
-    post(ruta, ...funciones){  // ... son operador rest
-        this.router.post(ruta, this.customResponses, ...funciones)  // ... son el operador spread
+    post(ruta, ...funciones){ 
+        this.router.post(ruta, this.customResponses, ...funciones)  
     }
 
-    put(ruta, ...funciones){  // ... son operador rest
-        this.router.put(ruta, this.customResponses, ...funciones)  // ... son el operador spread
+    put(ruta, ...funciones){  
+        this.router.put(ruta, this.customResponses, ...funciones)  
     }
 
     delete(ruta, ...funciones){
         this.router.delete(ruta, this.customResponses, ...funciones);
     }
     
-    //Aca se pueden definir middlewares que pueden ser reutilizados en distintas partes del proyecto
-    //sin tener quer rehacerlos cada vez que se lo requiera
     customResponses(req, res, next){
         res.success=(respuesta)=>{
             res.setHeader('Content-Type','application/json');
@@ -47,8 +45,6 @@ export class CustomRouter{
         }
 
         res.badRequest=(error)=>{
-            // log a un archivo... 
-            // peticion con fetch... para validar... 
             res.setHeader('Content-Type','application/json');
             return res.status(400).json({error})
         }

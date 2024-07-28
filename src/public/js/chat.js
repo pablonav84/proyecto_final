@@ -36,7 +36,6 @@ Swal.fire({
     })
 
     socket.on("nuevoMensaje", (nombre, mensaje) => {
-
       divMsjs.innerHTML += `<div class="mensaje"><strong>${nombre}</strong> dice: <i>${mensaje}</i></div><br>`
     })
 

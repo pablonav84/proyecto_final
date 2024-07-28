@@ -106,7 +106,7 @@ router.get('/carrito', passportCall("jwt"),async(req, res) => {
 
   let usuario=req.user
   let carrito=await carritosDAO.getOneByPopulate({_id:usuario.cart._id})
-  
+
   res.status(200).render('carrito', {usuario: req.user, carrito});
 })
 
@@ -118,6 +118,6 @@ router.get('/documentos', passportCall("jwt", {session:false}), (req, res) => {
 
 router.get('/pago', async (req, res) => {
   const ticket = await Ticket.findOne().sort({ created_at: -1 });
-  console.log(ticket)
+  
   res.status(200).render('pago', {ticket});
 })

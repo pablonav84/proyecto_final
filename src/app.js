@@ -9,7 +9,6 @@ import os from "os";
 import {fakerES_MX as faker} from '@faker-js/faker'
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from "swagger-ui-express";
-import { MercadoPagoConfig, Preference } from 'mercadopago';
 import { initPassport } from './config/passport.config.js';
 import { UsuariosRouter } from "./routes/router/usuariosRouter.js";
 import { router as sessionsRouter } from './routes/sessionsRouter.js';
@@ -24,11 +23,10 @@ import { router as mockingRouter } from "./routes/mockingRouter.js";
 import { router as testLogs } from "./routes/testLogs.js"
 import { router as pagosRouter } from "./routes/pagosRouter.js"
 
-const client = new MercadoPagoConfig({ accessToken: 'APP_USR-3297332412137299-071809-dcf360822902bfbdb82289bde3bc2ba4-1905396539' });
 
 if(cluster.isPrimary){
     console.log(os.cpus())
-    console.log(`Soy el proceso primary, con id ${process.pid}, y voy a generar nodos...`)
+    console.log(`Proceso primary iniciando, con id ${process.pid}, y se generarán nodos...`)
     for(let i=0; i<os.cpus().length; i++){
         cluster.fork()
     }
@@ -107,50 +105,15 @@ app.get('/usuario',(req,res)=>{
   return res.status(200).json({usuario});
 })
 
-app.post("/pagar", async (req, res) => {
-  const ticket = await Ticket.findOne().sort({ created_at: -1 });
-const importe = ticket.amount
-  
-  if(importe<1 || isNaN(importe)){
-      res.setHeader('Content-Type','application/json');
-      return res.status(400).json({error:`Importe inválido`})
-  }
-  const preference = new Preference(client);
-
-  let resultado=await preference.create({
-      body: {
-        items: [
-          {
-            id: ticket.code,
-            title: 'PRODUCTO_PRUEBA',
-            quantity: 1,
-            unit_price: importe
-          }
-        ],
-          back_urls: {
-              "success": "http://localhost:8080/feedback",
-              "failure": "http://localhost:8080/feedback",
-              "pending": "http://localhost:8080/feedback"
-          },
-          auto_return: "approved",
-      }
-  });
-
-  res.setHeader('Content-Type', 'application/json');
-  res.status(200).json({id:resultado.id});
-})
-
 app.get('/feedback', function (req, res) {
-  
-res.json({
-  Payment: req.query.payment_id,
-  Status: req.query.status,
-  MerchantOrder: req.query.merchant_order_id
-});
+  res.json({
+    Payment: req.query.payment_id,
+    Status: req.query.status,
+    MerchantOrder: req.query.merchant_order_id,
+  });
 });
 
 const server = app.listen(PORT, () => {
-  //console.log(`Server escuchando en puerto ${PORT}`);
   logger.info(`Server escuchando en puerto ${PORT} - pid: ${process.pid} - worker n°: ${cluster.worker.id}`)
 });
 
@@ -172,7 +135,6 @@ let usuarios=[]
     socket.on("mensaje", (nombre, mensaje) => {
       cManager.guardarMensaje(nombre, mensaje)
       .then(mensajeGuardado => {
-        logger.info('Mensaje guardado exitosamente:', mensajeGuardado )
       })
       .catch(error => {
         logger.info('Error al guardar el mensaje:', error)

@@ -53,11 +53,3 @@ Por reclamos o consultas Contáctese a: pagos@miecommerce.com
   res.setHeader("Content-Type", "application/json");
   res.status(200).json({ id: resultado.id });
 });
-
-router.get("/feedback", function (req, res) {
-  res.json({
-    Payment: req.query.payment_id,
-    Status: req.query.status,
-    MerchantOrder: req.query.merchant_order_id,
-  });
-});

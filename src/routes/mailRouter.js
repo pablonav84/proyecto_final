@@ -10,7 +10,6 @@ router.post("/mail", upload.array("imagenes"), async (req, res) => {
   if (!to || !subject || !message) {
     return res.redirect("/vistaMail?mensaje=Complete los datos...!!!");
   }
-  console.log(req.files);
   let attachments = [];
   req.files.forEach((archivo) => {
     attachments.push({

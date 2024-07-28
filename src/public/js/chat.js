@@ -7,7 +7,6 @@ Swal.fire({
     },
     allowOutsideClick: false
   }).then((datos) => {
-    console.log(datos)
     let nombre = datos.value
     document.title = nombre
 

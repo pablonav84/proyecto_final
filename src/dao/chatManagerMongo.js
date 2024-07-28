@@ -5,7 +5,6 @@ export class ChatManager {
     try {
       const nuevoMensaje = new chatModelo({ nombre, mensaje });
       const mensajeGuardado = await nuevoMensaje.save();
-      console.log('Mensaje guardado exitosamente');
       return mensajeGuardado;
     } catch (error) {
       console.error('Error al guardar el mensaje:', error);

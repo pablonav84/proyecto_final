@@ -1,3 +1,4 @@
+import { config } from "./config/config.js"
 import nodemailer from "nodemailer"
 
 const transporter=nodemailer.createTransport(
@@ -14,7 +15,7 @@ const transporter=nodemailer.createTransport(
 export const enviarMail=(to, subject, message, attachments)=>{
     return transporter.sendMail(
         {
-            from: "Pablo Navarro pablonav84@gmail.com",
+            from: `Pablo Navarro ${config.EMAIL}`,
             to,
             subject,
             html: message,
@@ -26,7 +27,7 @@ export const enviarMail=(to, subject, message, attachments)=>{
 export const recuperoPassword=async(to, subject, message)=>{
     return await transporter.sendMail(
         {
-            from:"Proyecto Ecommerce pablonav84@gmail.com",
+            from:`Proyecto Ecommerce ${config.EMAIL}`,
             to, subject, 
             html: message
         }

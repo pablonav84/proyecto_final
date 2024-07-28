@@ -13,5 +13,6 @@ export const config={
     SECRET:process.env.SECRET,
     MONGO_URL:process.env.MONGO_URL,
     DB_NAME:process.env.DB_NAME,
-    PERSISTENCE:process.env.PERSISTENCE||"MONGO"
+    PERSISTENCE:process.env.PERSISTENCE||"MONGO",
+    EMAIL:process.env.EMAIL
 }

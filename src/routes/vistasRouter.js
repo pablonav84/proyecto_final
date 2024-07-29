@@ -86,6 +86,59 @@ router.get("/productos", passportCall("jwt", {session:false}), async (req, res) 
     });
 });
 
+router.get("/editproduct", async (req, res) => {
+  
+  let { pagina, limit, sort } = req.query;
+  if (!pagina) {
+    pagina = 1;
+  }
+  let sortOption = {};
+  if (sort) {
+    
+    if (sort === "asc") {
+      sortOption = {
+      };
+    } else if (sort === "desc") {
+      sortOption = {
+      };
+    }
+  }
+  let {
+    docs: productos,
+    totalPages,
+    prevPage,
+    nextPage,
+    hasPrevPage,
+    hasNextPage,
+  } = await productsModelo.paginate(
+    {},
+    { limit: limit || 10, page: pagina, lean: true, sort: sortOption }
+  );
+  res.setHeader("Content-Type", "text/html");
+  return res
+    .status(200)
+    .render("editarproduct", {
+      productos,
+      totalPages,
+      prevPage,
+      nextPage,
+      hasPrevPage,
+      hasNextPage,
+    });
+});
+
+router.get("/nuevoproducto", (req, res) => {
+
+  return res.status(200).render("nuevoproducto");
+})
+
+router.get("/updateproduct/:id", async (req, res) => {
+  let id = req.params.id;
+  let producto = await productsModelo.findById(id);
+
+  return res.status(200).render("updateproduct", producto);
+})
+
 router.get("/productos/:id", passportCall("jwt", {session:false}), async (req, res) => {
 
   let usuario=req.user;

@@ -1,0 +1,63 @@
+<h2>Crear Producto</h2>
+<hr>
+<style>
+  form div {
+    margin-bottom: 10px;
+  }
+  label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+  }
+  input, textarea {
+    width: 200px;
+  }
+</style>
+
+<form action="/api/productos" method="POST">
+  <div>
+    <label for="title">Título:</label>
+    <input type="text" name="title" id="title">
+  </div>
+
+  <div>
+    <label for="description">Descripción:</label>
+    <textarea name="description" id="description"></textarea>
+  </div>
+
+  <div>
+    <label for="price">Precio:</label>
+    <input type="number" name="price" id="price">
+  </div>
+
+  <div>
+    <label for="thumbnail">Imagen:</label>
+    <input type="text" name="thumbnail" id="thumbnail">
+  </div>
+
+  <div>
+    <label for="code">Código:</label>
+    <input type="text" name="code" id="code">
+  </div>
+
+  <div>
+    <label for="stock">Stock:</label>
+    <input type="number" name="stock" id="stock">
+  </div>
+
+  <div>
+    <label for="category">Categoría:</label>
+    <input type="text" name="category" id="category">
+  </div>
+
+  <div>
+    <label for="password">Contraseña:</label>
+    <input type="password" name="password" id="password">
+  </div>
+
+  <input type="submit" value="Crear Producto">
+</form>
+<br>
+<button onclick="window.location.href='/editproduct'">Volver</button>
+<br>

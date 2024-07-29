@@ -1,23 +1,21 @@
 <h2>Productos</h2>
 <hr>
-<h3 data-carrito="{{usuario.cart._id}}" id="h3Usuario">Usuario conectado: {{usuarioDTO.fullName}}</h3>
-<hr>
 <ul>
     {{#each productos}}
   	<ul>
     <li>Marca: {{title}} - Detalle:{{description}} - id:{{code}}</li>
-    <button onclick="window.location.href='/productos/{{_id}}'">Detalles</button>
-    <button onclick="agregar('{{_id}}')">Agregar al carrito</button>
+    <button onclick="window.location.href='/updateproduct/{{_id}}'">Editar</button>
+    <button onclick="agregar('{{_id}}')">Eliminar</button>
     <br><br>
   	</ul>
   {{/each}}
 </ul>
 
-<button onclick="window.location.href='/productos?pagina=1'">Pag.1</button>
+<button onclick="window.location.href='/editproduct?pagina=1'">Pag.1</button>
 
 
 {{#if hasPrevPage}}
-    <button onclick="window.location.href='/productos?pagina={{PrevPage}}'">Pag.Ant.</button>
+    <button onclick="window.location.href='/editproduct?pagina={{PrevPage}}'">Pag.Ant.</button>
 
 {{/if}}
 
@@ -35,7 +33,7 @@
         inputPagina.addEventListener("change", function() {
             let pageNumber = parseInt(inputPagina.value); // Convertir el valor a un número entero
             if (!isNaN(pageNumber) && pageNumber > 0 && pageNumber <= {{totalPages}}) {
-                window.location.href = "/productos?pagina=" + pageNumber;
+                window.location.href = "/editproduct?pagina=" + pageNumber;
             } else {
                 alert("Por favor, ingresa un número de página válido.");
                 inputPagina.value = "{{currentPage}}"; // Restablecer el valor del campo de entrada a la página actual
@@ -45,15 +43,13 @@
 </script>
 
 {{#if hasNextPage}}
-    <button onclick="window.location.href='/productos?pagina={{nextPage}}'">Pag.Sig.</button>
+    <button onclick="window.location.href='/editproduct?pagina={{nextPage}}'">Pag.Sig.</button>
 
 {{/if}}
 
-<button onclick="window.location.href='/productos?pagina={{totalPages}}'">Ult. Pag.</button>
+<button onclick="window.location.href='/editproduct?pagina={{totalPages}}'">Ult. Pag.</button>
 <br>
-<button onclick="window.location.href='/editproduct'">Editar Productos</button>
-<br>
-<button onclick="window.location.href='/carrito'">Ver Carrito</button>
+<button onclick="window.location.href='/nuevoproducto'">Crear Nuevo</button>
 <br>
 <button onclick="window.location.href='/home'">Volver</button>
 <br>

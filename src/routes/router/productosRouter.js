@@ -4,8 +4,6 @@ import { auth } from "../../middleware/auth.js";
 import { passportCall } from "../../utils.js";
 import { CustomRouter } from "./router.js";
 
-const productsManager=new ProductsManager()
-
 export class ProductosRouter extends CustomRouter{
     init(){
         this.get("/", passportCall("jwt"), auth(["usuario", "admin", "premium"]), ProductosController.getProductos)

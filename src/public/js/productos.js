@@ -1,5 +1,5 @@
 const agregar=async(pid)=>{
-    
+    console.log(pid)
     let h3Usuario=document.getElementById("h3Usuario")
     let cid=h3Usuario.dataset.carrito
     

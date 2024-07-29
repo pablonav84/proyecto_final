@@ -6,7 +6,6 @@ import Ticket from "../dao/models/ticketModelo.js";
 import ErrorHandlers from "../utils/errorCarritos.js";
 import CustomError from "../utils/errorCustom.js";
 import { ERRORES } from "../utils/erroresIndice.js";
-import { Cart } from "../dao/models/cartModelo.js";
 
 export default class CarritosController {
   static getCart = async (req, res) => {

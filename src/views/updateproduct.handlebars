@@ -15,7 +15,7 @@
 
 <h2>Actualizar Producto</h2>
 <hr>
-<form action="/api/productos/{{id}}" method="PUT">
+<form action="/api/productos/{{id}}" method="POST">
   <div>
     <label for="title">Título:</label>
     <input type="text" name="title" id="title" value="{{title}}">
@@ -23,7 +23,7 @@
 
   <div>
     <label for="description">Descripción:</label>
-    <textarea name="description" id="description">{{description}}</textarea>
+    <input type="text" name="description" id="description" value="{{description}}">
   </div>
 
 <div>
@@ -38,7 +38,7 @@
 
   <div>
     <label for="code">Código:</label>
-    <input type="text" name="code" id="code" value="{{code}}">
+    <input type="text" name="code" id="code">
   </div>
 
   <div>
@@ -58,6 +58,7 @@
 
   <input type="submit" value="Actualizar Producto">
 </form>
+
 <br>
 <button onclick="window.location.href='/editproduct'">Volver</button>
 <br>
